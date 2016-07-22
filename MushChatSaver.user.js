@@ -234,7 +234,7 @@ var channelButtons = function() {
 
 //Buttons panel
 var buttonsPanel = $('<div>').css({ marginTop: '20px', textAlign: 'center', backgroundColor: '#339', border: '2px #008 solid' }).appendTo($('#chat_col'));
-$('<h3>').css('text-align', 'center').text(TXT.scriptName.replace('%1', GM_info.script.version).appendTo(buttonsPanel);
+$('<h3>').css('text-align', 'center').text(TXT.scriptName.replace('%1', GM_info.script.version)).appendTo(buttonsPanel);
 
 createButton(TXT.loadWholeWall).appendTo(buttonsPanel).on('click', function() {
 	$(this).find('.butbg').prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");

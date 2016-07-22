@@ -733,6 +733,11 @@ function newLog(el, isFirst) {
 	addNewEl('input', p, null, null, { type: 'text', placeholder: TXT.newLogDefaultText }).addEventListener('input', function() {
 		this.previousSibling.innerHTML = this.value.replace(/\/\/(.*?)\/\//g, '<i>$1</i>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 	});
+	addNewEl('img', log, null, null, {
+		src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==', //pixel.gif
+		class: 'msgDelete',
+		onclick: 'this.parentNode.parentNode.removeChild(this.parentNode);'
+	});
 	addNewEl('div', log, null, TXT.newLog, { class: 'newLog', onclick: 'newLog(this, false);' });
 	if (isFirst) {
 		el.parentNode.insertBefore(log, el.nextSibling);

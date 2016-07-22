@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2
+// @version      2.0.1
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -34,7 +34,7 @@ function createButton(html) {
 
 if (document.domain == 'mush.vg') {
 	TXT = {
-		scriptName: "Mush Chat Saver",
+		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Mur chargé !",
 		unfav: "MCS : Plus favori...",
 		copyPrivate: "Copier le canal privé",
@@ -48,7 +48,7 @@ if (document.domain == 'mush.vg') {
 }
 else {
 	TXT = {
-		scriptName: "Mush Chat Saver",
+		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Wall loaded!",
 		unfav: "MCS: Remove favorite...",
 		copyPrivate: "Copy private channel",
@@ -234,7 +234,7 @@ var channelButtons = function() {
 
 //Buttons panel
 var buttonsPanel = $('<div>').css({ marginTop: '20px', textAlign: 'center', backgroundColor: '#339', border: '2px #008 solid' }).appendTo($('#chat_col'));
-$('<h3>').css('text-align', 'center').text(TXT.scriptName).appendTo(buttonsPanel);
+$('<h3>').css('text-align', 'center').text(TXT.scriptName.replace('%1', GM_info.script.version).appendTo(buttonsPanel);
 
 createButton(TXT.loadWholeWall).appendTo(buttonsPanel).on('click', function() {
 	$(this).find('.butbg').prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");

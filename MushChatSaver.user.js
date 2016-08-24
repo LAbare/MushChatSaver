@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.0.1
+// @version      2.0.3
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -23,6 +23,7 @@
 // @downloadURL  http://labare.github.io/MushChatSaver/MushChatSaver.user.js
 // ==/UserScript==
 
+
 var console = unsafeWindow.console;
 var Main = unsafeWindow.Main;
 
@@ -35,15 +36,16 @@ function createButton(html) {
 if (document.domain == 'mush.vg') {
 	TXT = {
 		scriptName: "Mush Chat Saver v.%1",
-		wallLoaded: "Mur chargé !",
-		unfav: "MCS : Plus favori...",
+		wallLoaded: "Mur chargé !",
+		unfav: "MCS : Plus favori...",
 		copyPrivate: "Copier le canal privé",
 		loadWholeWall: "Charger tout le mur",
 		copyMainWall: "Copier le mur",
 		pageLink: "Accéder à l'éditeur (nouvel onglet)",
 		showReplies: "Montrer les réponses",
-		popupTitle: "Copiez ce code :",
+		popupTitle: "Copiez ce code :",
 		popupTip: "(Cliquez dans le texte et faites Ctrl+A pour tout sélectionner)",
+		anchor: "Ancre",
 	}
 }
 else {
@@ -58,6 +60,7 @@ else {
 		showReplies: "Show replies",
 		popupTitle: "Copy this code:",
 		popupTip: "(Click in the text and press Ctrl+A to select all)",
+		anchor: "Anchor",
 	}
 }
 
@@ -233,7 +236,11 @@ var channelButtons = function() {
 };
 
 //Buttons panel
-var buttonsPanel = $('<div>').css({ marginTop: '20px', textAlign: 'center', backgroundColor: '#339', border: '2px #008 solid' }).appendTo($('#chat_col'));
+var parent = $('#chat_col'); //Onship
+if (!parent.length) { //Death page
+	parent = $('.chat_box');
+}
+var buttonsPanel = $('<div>').css({ marginTop: '20px', textAlign: 'center', backgroundColor: '#339', border: '2px #008 solid' }).appendTo(parent);
 $('<h3>').css('text-align', 'center').text(TXT.scriptName.replace('%1', GM_info.script.version)).appendTo(buttonsPanel);
 
 createButton(TXT.loadWholeWall).appendTo(buttonsPanel).on('click', function() {
@@ -242,7 +249,7 @@ createButton(TXT.loadWholeWall).appendTo(buttonsPanel).on('click', function() {
 });
 
 //Generate shortened HTML
-var generateMessage = function(parent, type) {
+var generateMessage = function(parent, type, i) {
 	var content = /<span class=['"]buddy['"]>[^<]+<\/span>(.*)<span class=['"]ago['"]>/.exec(parent.html().replace(/\n/g, '').replace(/\s+/g, ' '))[1];
 	if (parent.find('p').length) { //content is a paragraph
 		content = $(content);
@@ -251,11 +258,17 @@ var generateMessage = function(parent, type) {
 		content = $('<p>').html(content);
 	}
 	content.find('img').removeAttr('class');
+	var id = '';
+	var anchor = '';
+	if (type == 'main') {
+		id = ' id="' + i + '"';
+		anchor = ' <a class="anchor" href="#' + i + '">' + TXT.anchor + '</a>';
+	}
 	if (parent.find('.neron').length) {
-		return '<div class="' + type + ' neron"> <div class="neron"></div> <p>' + parent.find('.buddy')[0].outerHTML + content.html().trim() + '</p> </div>\n';
+		return '<div' + id + ' class="' + type + ' neron"> <div class="neron_img"></div> <p>' + parent.find('.buddy')[0].outerHTML + content.html().trim() + '</p>' + anchor + ' </div>\n';
 	}
 	else {
-		return '<div class="' + type + '"> ' + parent.find('.char')[0].outerHTML + ' <p>' + parent.find('.buddy')[0].outerHTML + ' ' + content.html().trim() + '</p> </div>\n';
+		return '<div' + id + ' class="' + type + '"> ' + parent.find('.char')[0].outerHTML + ' <p>' + parent.find('.buddy')[0].outerHTML + ' ' + content.html().trim() + '</p>' + anchor + ' </div>\n';
 	}
 };
 
@@ -265,6 +278,7 @@ createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 	imagesToData($('#cdStdWall'), function() {
 		var output = '';
 		var ks = [];
+		var i = 1;
 		$('#cdStdWall .unit').each(function() {
 			//Check for double topics
 			var k = $(this).attr('data-k');
@@ -274,7 +288,8 @@ createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 			ks.push(k);
 
 			//Main message
-			output += generateMessage($(this).find('.mainmessage'), 'main');
+			output += generateMessage($(this).find('.mainmessage'), 'main', i);
+			i += 1;
 
 			//Replies
 			if ($(this).find('.reply.bubble').length) {
@@ -293,7 +308,6 @@ createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 	});
 });
 
-//$('<a>').attr({ href: 'http://labare.github.io/MushChatSaver/MushChatSaver.html', target: '_blank' }).css('margin-top', '5px').text(TXT.pageLink).appendTo(buttonsPanel);
 createButton('<a href="http://labare.github.io/MushChatSaver/MushChatSaver.html" target="_blank">' + TXT.pageLink + '</a>').appendTo(buttonsPanel);
 
 //Output
@@ -314,3 +328,4 @@ window.setInterval(function() {
 		channelButtons();
 	}
 }, 500);
+

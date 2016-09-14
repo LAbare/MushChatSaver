@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.0.3
+// @version      2.0.4
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -193,7 +193,7 @@ var channelButtons = function() {
 			return true;
 		}
 
-		createButton(TXT.copyPrivate).insertBefore($(this).find('.mini_priv').eq(0)).on('click', function() {
+		createButton(TXT.copyPrivate).insertAfter($(this).find('.replybuttons, .butmini').first()).on('click', function() {
 			var channel = $(this).parent();
 			var output = '';
 			imagesToData(channel, function() {

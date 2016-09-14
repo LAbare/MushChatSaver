@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;">
-	<title>Sauveur de chats Mush v2.0.3 — Mush Chat Saver v2.0.3</title>
+	<title>Sauveur de chats Mush v2.0.4 — Mush Chat Saver v2.0.4</title>
 	<meta charset="UTF-8">
 	<style>
 		html, body { margin: 0; padding: 0; }
@@ -25,7 +25,7 @@
 		.editoron #input, .editoron .options { display: block; }
 		.editoroff #input, .editoroff .options { display: none; }
 
-		.tab { display: inline-block; height: 24px; width: 31px; cursor: pointer; background-image: url(data:image/gif;base64,R0lGODlhHwAYAKIAABcaWxcaWhcbXBcaXCE1eAAAAAAAAAAAACH5BAAAAAAALAAAAAAfABgAAAMoCArU/jA2QQcIQepNFuZgpGRh6TBmqq5s675wLM90bd94ru987/+SBAA7); }
+		.tab { display: inline-block; height: 24px; width: 31px; margin-right: 3px; cursor: pointer; background-image: url(data:image/gif;base64,R0lGODlhHwAYAKIAABcaWxcaWhcbXBcaXCE1eAAAAAAAAAAAACH5BAAAAAAALAAAAAAfABgAAAMoCArU/jA2QQcIQepNFuZgpGRh6TBmqq5s675wLM90bd94ru987/+SBAA7); }
 		.tab img { margin-top: 4px; }
 		#editortab { transform: scaleY(-1); margin-right: 40px; }
 		.tab:not(#editortab) { position: relative; top: 6px; }
@@ -53,6 +53,9 @@
 		#popup p { margin-top: 10px; cursor: pointer; }
 		#popup p:last-of-type { margin-top: 20px; }
 		#popup p:hover { color: #555; }
+		#popup.large { width: 600px; }
+		#popup.large textarea { width: 100%; height: 300px; }
+		.closePopup { position: absolute; top: 5px; right: 5px; cursor: pointer; width: 12px; height: 12px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAMVJREFUKJF9krENgzAQRZ8RkpURUFaiTkUKpmAGdkCKFFKRMqyQkjEQGwQcRboUBuckIK+y/L99d982ADY9CzOurQ2KlWbTs4iIMIrwcqINW1oMYCZA3tA9cUWOBQFwTYUZ/f5CDD9zKF3kftE9YeghOQbNLKVdkXtxi+SILS+4tjZhwN1DygwQbV+5TxRub6ptx9D7IOb0YptmMj2uPo25BW1ecE2FPaFiVdjy4k1LWopVrHpAC6HV++FDRog1U89/+/s1vnlHd7qgRaYSAAAAAElFTkSuQmCC); }
 
 		#wall, .private { max-width: 800px; margin: 0 auto; }
 		.hiddenreplies { display: none; }
@@ -135,11 +138,13 @@
 </head>
 
 <body class='editoron'>
+<div id='catsIndex' data-index='1'></div>
+<div id='privatesIndex' data-index='1'></div>
 <div id='tip'></div>
 
 <div id='fr'>
 	<div id='input'>
-		<h1>Sauveur de chats Mush V2</h1>
+		<h1>Sauveur de chats Mush v2.0.4</h1>
 		<h3>Garanti sans Schrödinger infecté</h3>
 
 		<p>Utilisez le <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">script associé</a> pour récupérer les canaux dans un format utilisable.</p>
@@ -171,6 +176,8 @@
 
 		<p style="font-weight: bold; text-align: center; margin-top: 10px;">Une fois les canaux ajoutés, enregistrez cette page (Fichier → Enregistrer sous, ou Ctrl+S ; pas en favoris !). Vous pouvez y ajouter d'autres canaux et les modifier par la suite, mais n'oubliez pas d'enregistrer au fur et à mesure.<br />Les outils d'édition sont cachés lorsque l'éditeur est fermé.</p>
 		<p style='text-align: center;'><a href='' data-state='hidden' onclick='toggleAllReplies(this); return false;'>Montrer toutes les réponses</a></p>
+		<p style='text-align: center;'><a href='' onclick='retrieveMain(); return false;'>Récupérer le code du canal général</a></p>
+		<p style='text-align: center;'><a href='' onclick='deleteMain(); return false;'>Supprimer le canal général</a></p>
 	</div>
 
 	<div id="chat">
@@ -198,7 +205,7 @@
 
 <div id='en'>
 	<div id='input'>
-		<h1>Mush Chat Saver V2</h1>
+		<h1>Mush Chat Saver v2.0.4</h1>
 		<h3>Spoken words fly away, but words written on such a nice page definitely remain.</h3>
 
 		<p>Use the <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">MCS script</a> to retrieve channels in MCS-usable format.</p>
@@ -229,6 +236,8 @@
 		</div>
 		<p style="font-weight: bold; text-align: center; margin-top: 10px;">Once you added your channels, save this page (File → Save As, or Ctrl+S; not as a bookmark!). You can carry on editing and adding channels afterwards, but do not forget to save again.<br />Editing tools are hidden when the editor is closed.</p>
 		<p style='text-align: center;'><a href='' data-state='hidden' onclick='toggleAllReplies(this); return false;'>Show all replies</a></p>
+		<p style='text-align: center;'><a href='' onclick='retrieveMain(); return false;'>Retrieve main wall code</a></p>
+		<p style='text-align: center;'><a href='' onclick='deleteMain(); return false;'>Delete main wall</a></p>
 	</div>
 
 	<div id="chat">
@@ -259,11 +268,14 @@
 if ((sel('#fr') && sel('#en') && confirm("OK = Français\nCancel = English")) || !sel('#en')) {
 	var TXT = {
 		mushChannel: "Canal Mush",
+		retrieve: "Récupérer le code",
 		rename: "Renommer",
 		move: "Déplacer",
 		delete: "Supprimer",
+		retrieveTitle: "Copiez ce code :",
 		moveChannelTitle: "Déplacer le canal vers le groupe :",
 		cancel: "Annuler",
+		confirmDeleteMain: "Attention : une fois supprimé, le canal général n'est plus récupérable. Voulez-vous continuer ?",
 		promptNewCatName: "Nouveau nom de la catégorie :",
 		confirmDeleteCat: "Attention : les canaux privés de cette catégorie seront transférés dans la catégorie Canal Mush. Vous pouvez toujours les déplacer ou les supprimer à n'importe quel moment, un par un. Voulez-vous vraiment supprimer cette catégorie ?",
 		alertUnfilledFields: "Veuillez compléter tous les champs.",
@@ -282,17 +294,20 @@ if ((sel('#fr') && sel('#en') && confirm("OK = Français\nCancel = English")) ||
 	var lang = sel('#en');
 	if (lang) {
 		document.body.removeChild(lang);
-		document.title = "Sauveur de chats Mush V2";
+		document.title = "Sauveur de chats Mush v2.0.4";
 	}
 }
 else {
 	var TXT = {
 		mushChannel: "Mush channel",
+		retrieve: "Retrieve code",
 		rename: "Rename",
 		move: "Move",
 		delete: "Delete",
+		retrieveTitle: "Copy this code:",
 		moveChannelTitle: "Move channel to group:",
 		cancel: "Cancel",
+		confirmDeleteMain: "Warning: once deleted, the main wall cannot be retrieved. Continue?",
 		promptNewCatName: "New group name:",
 		confirmDeleteCat: "Warning: the private channels of this group will be moved to the Mush channel group. You may move them again or delete them anytime, one by one. Do you really want to delete this group?",
 		alertUnfilledFields: "Please fill all fields.",
@@ -311,7 +326,7 @@ else {
 	var lang = sel('#fr');
 	if (lang) {
 		document.body.removeChild(lang);
-		document.title = "Mush Chat Saver V2";
+		document.title = "Mush Chat Saver v2.0.4";
 	}
 }
 
@@ -354,7 +369,8 @@ function addNewEl(type, parent, id, content, attrs) {
 }
 
 /* FONCTIONS DE GÉNÉRATION */
-function styleImages(parent) {
+/*function styleImages(parent) {
+	//Don't use this, it doesn't help much and makes retrieving a channel code harder
 	var images = parent.getElementsByTagName('img');
 	for (var i = 0; i < images.length; i++) {
 		var name = images[i].getAttribute('data-imgname');
@@ -370,11 +386,11 @@ function styleImages(parent) {
 			images[i].removeAttribute('data-imgname');
 		}
 	}
-}
+}*/
 
 function generateMain() {
 	sel('#wall').innerHTML = sel('#input_main').value;
-	styleImages(sel('#wall'));
+	//styleImages(sel('#wall'));
 	sel('#input_main').value = '';
 	//Display
 	var selected = sel('.selected');
@@ -394,9 +410,27 @@ function generateMain() {
 	window.onbeforeunload = function() { return "Le bisou o/"; };
 }
 
+function retrieveMain() {
+	var popup = addNewEl('div', document.body, 'popup', '<h1>' + TXT.retrieveTitle + '</h1>', { class: 'large' });
+	popup.style.left = Math.floor((window.innerWidth - 600) / 2) + 'px';
+	addNewEl('img', popup, null, null, {
+		src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==', //pixel.gif
+		class: 'closePopup',
+		onclick: 'document.body.removeChild(this.parentNode);'
+	});
+	addNewEl('textarea', popup).value = sel('#wall').innerHTML;
+}
+
+function deleteMain() {
+	if (confirm(TXT.confirmDeleteMain)) {
+		sel('#wall').innerHTML = '';
+	}
+}
+
 function addCat() {
 	var name = sel('[name="input_cat"]').value;
-	var index = selAll('.cat').length;
+	var index = parseInt(sel('#catsIndex').getAttribute('data-index'));
+	sel('#catsIndex').setAttribute('data-index', index + 1);
 
 	//addChannel select cat
 	var selected = sel('[name="input_name_private_cat"] [selected="selected"]');
@@ -481,7 +515,8 @@ function addChannel() {
 		alert(TXT.alertUnfilledFields);
 		return;
 	}
-	var index = selAll('.private').length;
+	var index = parseInt(sel('#privatesIndex').getAttribute('data-index'));
+	sel('#privatesIndex').setAttribute('data-index', index + 1);
 
 	//Channel
 	var channel = document.createElement('div');
@@ -493,6 +528,7 @@ function addChannel() {
 		channel.className = 'private';
 	}
 	var options = addNewEl('p', channel, null, TXT.channelSettings, { class: 'options' });
+	addNewEl('span', options, null, TXT.retrieve, { onclick: 'retrieveChannel(' + index + ');' });
 	addNewEl('span', options, null, TXT.rename, { onclick: 'renameChannel(' + index + ');' });
 	addNewEl('span', options, null, TXT.move, { onclick: 'moveChannel(' + index + ');' });
 	addNewEl('span', options, null, TXT.delete, { onclick: 'deleteChannel(' + index + ');' });
@@ -502,7 +538,7 @@ function addChannel() {
 	sel('#chat').appendChild(channel);
 
 	//Images
-	styleImages(channel);
+	//styleImages(channel);
 
 	//Channel editing
 	var divs = channel.querySelectorAll('.log, .message');
@@ -529,6 +565,28 @@ function addChannel() {
 	sel('#input_private').value = '';
 	sel('[name="input_name_private"]').value = '';
 	window.onbeforeunload = function() { return "Le bisou o/"; };
+}
+
+function retrieveChannel(channel) {
+	var clone = sel('#private' + channel).cloneNode(true);
+	clone.removeChild(sel('.options', clone));
+	clone.removeChild(sel('h1', clone));
+	var deletes = selAll('.msgDelete', clone);
+	for (var i = 0; i < deletes.length; i++) {
+		deletes[i].parentNode.removeChild(deletes[i]);
+	}
+	var newlogs = selAll('.newLog', clone);
+	for (var i = 0; i < newlogs.length; i++) {
+		newlogs[i].parentNode.removeChild(newlogs[i]);
+	}
+	var popup = addNewEl('div', document.body, 'popup', '<h1>' + TXT.retrieveTitle + '</h1>', { class: 'large' });
+	popup.style.left = Math.floor((window.innerWidth - 600) / 2) + 'px';
+	addNewEl('img', popup, null, null, {
+		src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==', //pixel.gif
+		class: 'closePopup',
+		onclick: 'document.body.removeChild(this.parentNode);'
+	});
+	addNewEl('textarea', popup).value = clone.innerHTML;
 }
 
 function renameChannel(channel) {

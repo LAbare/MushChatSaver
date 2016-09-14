@@ -193,7 +193,7 @@ var channelButtons = function() {
 			return true;
 		}
 
-		createButton(TXT.copyPrivate).insertAfter($(this).find('.replybuttons, .butmini').first()).on('click', function() {
+		createButton(TXT.copyPrivate).insertAfter($(this).children().first()).on('click', function() {
 			var channel = $(this).parent();
 			var output = '';
 			imagesToData(channel, function() {

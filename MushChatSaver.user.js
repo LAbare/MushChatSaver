@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.0.4
+// @version      2.0.5
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -38,6 +38,7 @@ if (document.domain == 'mush.vg') {
 		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Mur chargé !",
 		unfav: "MCS : Plus favori...",
+		allFavsToMain: "Enlever tous les favoris",
 		copyPrivate: "Copier le canal privé",
 		loadWholeWall: "Charger tout le mur",
 		copyMainWall: "Copier le mur",
@@ -53,6 +54,7 @@ else {
 		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Wall loaded!",
 		unfav: "MCS: Remove favorite...",
+		allFavsToMain: "Remove all favorites",
 		copyPrivate: "Copy private channel",
 		loadWholeWall: "Load the whole main wall",
 		copyMainWall: "Copy main wall",
@@ -138,6 +140,7 @@ function customBase64Encode(inputStr) {
 
 var images = {};
 var imagesToData = function(el, callback) {
+	try{
 	var img = el.find('.what_happened img:not(.MSC-datafied), .bubble p img:not(.MSC-datafied)');
 	if (!img.length) { //All images have been datafied
 		callback();
@@ -153,7 +156,13 @@ var imagesToData = function(el, callback) {
 			src = img.attr('src');
 		}
 		src = src.replace(/^\/\//, 'http://').replace(/^\/img/, 'http://' + document.domain + '/img');
-		name = /[^\/]+\.(png|gif|jpe?g)/.exec(src)[0];
+		name = /[^\/]+\.(png|gif|jpe?g)/.exec(src);
+		if (name == null) { //Rockfaller/Monster Hotel images
+			name = /\/(\w+)$/.exec(src)[1] + '.png';
+		}
+		else {
+			name = name[0];
+		}
 		var width = img[0].naturalWidth;
 		var height = img[0].naturalHeight;
 		if (name in images) {
@@ -183,6 +192,7 @@ var imagesToData = function(el, callback) {
 			});
 		}
 	}
+	}catch(e){console.log(e);}
 };
 
 
@@ -250,36 +260,38 @@ createButton(TXT.loadWholeWall).appendTo(buttonsPanel).on('click', function() {
 
 //Generate shortened HTML
 var generateMessage = function(parent, type, i) {
-	var content = /<span class=['"]buddy['"]>[^<]+<\/span>(.*)<span class=['"]ago['"]>/.exec(parent.html().replace(/\n/g, '').replace(/\s+/g, ' '))[1];
-	if (parent.find('p').length) { //content is a paragraph
-		content = $(content);
+	try{
+	var clone = parent.clone();
+	clone.find('.char').insertBefore(clone.find('.buddy'));
+	if (type == "main") {
+		clone = clone.find('.mainsaid');
+		clone.attr('id', i);
+		$('<a>').addClass('anchor').attr('href', '#' + i).text(TXT.anchor).appendTo(clone);
 	}
-	else { //content is a text node
-		content = $('<p>').html(content);
+	clone.find('.triangleleft, .triangleup, .replybuttons, .ago, .clear').remove().removeAttr('onmouseover').removeAttr('onmouseout').removeAttr('data-checked');
+	clone.attr('class', type);
+	var buddy = clone.find('.buddy');
+	buddy.text(buddy.text() + " ");
+
+	if (clone.find('.neron').length) {
+		clone.addClass('neron');
+		clone.find('.neron').html('<div class="neron_img"></div>');
 	}
-	content.find('img').removeAttr('class');
-	var id = '';
-	var anchor = '';
-	if (type == 'main') {
-		id = ' id="' + i + '"';
-		anchor = ' <a class="anchor" href="#' + i + '">' + TXT.anchor + '</a>';
-	}
-	if (parent.find('.neron').length) {
-		return '<div' + id + ' class="' + type + ' neron"> <div class="neron_img"></div> <p>' + parent.find('.buddy')[0].outerHTML + content.html().trim() + '</p>' + anchor + ' </div>\n';
-	}
-	else {
-		return '<div' + id + ' class="' + type + '"> ' + parent.find('.char')[0].outerHTML + ' <p>' + parent.find('.buddy')[0].outerHTML + ' ' + content.html().trim() + '</p>' + anchor + ' </div>\n';
-	}
+	return clone[0].outerHTML.replace(/\s+/gm, ' ') + '\n';
+	}catch(e){console.log(e);}
 };
 
 //Main wall
 createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 	$(this).find('.butbg').prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");
 	imagesToData($('#cdStdWall'), function() {
+		try{
+		console.log('MSC: Copying wall…');
 		var output = '';
 		var ks = [];
 		var i = 1;
 		$('#cdStdWall .unit').each(function() {
+			try{
 			//Check for double topics
 			var k = $(this).attr('data-k');
 			if (ks.indexOf(k) != -1) {
@@ -301,13 +313,37 @@ createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 				output += '</div>\n';
 			}
 			output += '\n';
+			}catch(e){console.log(e);}
 		});
 		$('#MCS-output').val(output);
 		$('#MCS-popup').show();
 		$('.MCSloading').remove();
+		}catch(e){console.log(e);}
 	});
 });
 
+//Remove all favourites
+var removeFavourite = function(list, index) {
+	var k = list[index];
+	GM_xmlhttpRequest({
+		method: 'GET', url: 'http://' + document.domain + '/wallUnfav/' + k,
+		onload: function(resp) {
+			index += 1;
+			if (index == list.length) { //All done
+				window.location('/'); //Reload all
+			}
+			else {
+				removeFavourite(list, index);
+			}
+		}
+	});
+}
+createButton(TXT.allFavsToMain).appendTo(buttonsPanel).on('click', function() {
+	var list = [];
+	$('#cdFavWall .unit').each(function() { list.append($(this).attr('data-k')); });
+});
+
+//Editor
 createButton('<a href="http://labare.github.io/MushChatSaver/MushChatSaver.html" target="_blank">' + TXT.pageLink + '</a>').appendTo(buttonsPanel);
 
 //Output

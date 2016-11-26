@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.0.5
+// @version      2.1.1
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -29,7 +29,7 @@ var Main = unsafeWindow.Main;
 
 
 function createButton(html) {
-	return $('<div>').addClass('but').html("<div class='butright'><div class='butbg'>" + html + "</div></div>");
+	return $('<div>').addClass('but').html("<div class='butright'><div class='butbg'>" + html + "</div></div>").css('width', '95%');
 };
 
 
@@ -38,10 +38,11 @@ if (document.domain == 'mush.vg') {
 		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Mur chargé !",
 		unfav: "MCS : Plus favori...",
-		allFavsToMain: "Enlever tous les favoris",
+		allFavsToMain: "Dé-favoriser tous les sujets",
 		copyPrivate: "Copier le canal privé",
-		loadWholeWall: "Charger tout le mur",
-		copyMainWall: "Copier le mur",
+		loadWholeWall: "Charger tout le canal général",
+		copyMainWall: "Copier le canal général",
+		copyMainWarning: "Attention : les sujets en favori ne sont pas copiés.",
 		pageLink: "Accéder à l'éditeur (nouvel onglet)",
 		showReplies: "Montrer les réponses",
 		popupTitle: "Copiez ce code :",
@@ -54,10 +55,11 @@ else {
 		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Wall loaded!",
 		unfav: "MCS: Remove favorite...",
-		allFavsToMain: "Remove all favorites",
+		allFavsToMain: "Unfavorite all topics",
 		copyPrivate: "Copy private channel",
 		loadWholeWall: "Load the whole main wall",
 		copyMainWall: "Copy main wall",
+		copyMainWarning: "Warning: topics in the Favorites tab are not copied.",
 		pageLink: "Open editor page (new tab)",
 		showReplies: "Show replies",
 		popupTitle: "Copy this code:",
@@ -140,7 +142,6 @@ function customBase64Encode(inputStr) {
 
 var images = {};
 var imagesToData = function(el, callback) {
-	try{
 	var img = el.find('.what_happened img:not(.MSC-datafied), .bubble p img:not(.MSC-datafied)');
 	if (!img.length) { //All images have been datafied
 		callback();
@@ -175,7 +176,7 @@ var imagesToData = function(el, callback) {
 			imagesToData(el, callback);
 		}
 		else {
-			console.log('MSC: downloading ' + name);
+			console.log('MSC: downloading image ' + name);
 			GM_xmlhttpRequest({
 				method: 'GET', url: src, overrideMimeType: 'text/plain; charset=x-user-defined',
 				onload: function(resp) {
@@ -192,7 +193,6 @@ var imagesToData = function(el, callback) {
 			});
 		}
 	}
-	}catch(e){console.log(e);}
 };
 
 
@@ -203,7 +203,7 @@ var channelButtons = function() {
 			return true;
 		}
 
-		createButton(TXT.copyPrivate).insertAfter($(this).children().first()).on('click', function() {
+		createButton(TXT.copyPrivate).css('float', 'left').insertAfter($(this).children().first()).on('click', function() { //float:left si le bouton se mélange aux boutons de réponse
 			var channel = $(this).parent();
 			var output = '';
 			imagesToData(channel, function() {
@@ -260,7 +260,6 @@ createButton(TXT.loadWholeWall).appendTo(buttonsPanel).on('click', function() {
 
 //Generate shortened HTML
 var generateMessage = function(parent, type, i) {
-	try{
 	var clone = parent.clone();
 	clone.find('.char').insertBefore(clone.find('.buddy'));
 	if (type == "main") {
@@ -278,20 +277,17 @@ var generateMessage = function(parent, type, i) {
 		clone.find('.neron').html('<div class="neron_img"></div>');
 	}
 	return clone[0].outerHTML.replace(/\s+/gm, ' ') + '\n';
-	}catch(e){console.log(e);}
 };
 
 //Main wall
 createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 	$(this).find('.butbg').prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");
 	imagesToData($('#cdStdWall'), function() {
-		try{
 		console.log('MSC: Copying wall…');
 		var output = '';
 		var ks = [];
 		var i = 1;
 		$('#cdStdWall .unit').each(function() {
-			try{
 			//Check for double topics
 			var k = $(this).attr('data-k');
 			if (ks.indexOf(k) != -1) {
@@ -313,18 +309,18 @@ createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 				output += '</div>\n';
 			}
 			output += '\n';
-			}catch(e){console.log(e);}
 		});
 		$('#MCS-output').val(output);
 		$('#MCS-popup').show();
 		$('.MCSloading').remove();
-		}catch(e){console.log(e);}
 	});
 });
+$('<p>').text(TXT.copyMainWarning).appendTo(buttonsPanel);
 
 //Remove all favourites
 var removeFavourite = function(list, index) {
 	var k = list[index];
+	console.log('MCS: removing favourite #' + index + ' (k=' + k + ')');
 	GM_xmlhttpRequest({
 		method: 'GET', url: 'http://' + document.domain + '/wallUnfav/' + k,
 		onload: function(resp) {
@@ -340,7 +336,9 @@ var removeFavourite = function(list, index) {
 }
 createButton(TXT.allFavsToMain).appendTo(buttonsPanel).on('click', function() {
 	var list = [];
-	$('#cdFavWall .unit').each(function() { list.append($(this).attr('data-k')); });
+	$('#cdFavWall .unit').each(function() { list.push($(this).attr('data-k')); });
+	$(this).find('.butbg').prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");
+	removeFavourite(list, 0);
 });
 
 //Editor

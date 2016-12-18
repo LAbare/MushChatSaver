@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.1.1
+// @version      2.1.2
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -267,7 +267,7 @@ var generateMessage = function(parent, type, i) {
 		clone.attr('id', i);
 		$('<a>').addClass('anchor').attr('href', '#' + i).text(TXT.anchor).appendTo(clone);
 	}
-	clone.find('.triangleleft, .triangleup, .replybuttons, .ago, .clear').remove().removeAttr('onmouseover').removeAttr('onmouseout').removeAttr('data-checked');
+	clone.find('.triangleleft, .triangleup, .replybuttons, .ago, .clear, .recent').remove().removeAttr('onmouseover').removeAttr('onmouseout').removeAttr('data-checked');
 	clone.attr('class', type);
 	var buddy = clone.find('.buddy');
 	buddy.text(buddy.text() + " ");

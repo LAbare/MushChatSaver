@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.1.2
+// @version      2.1.3
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -142,7 +142,7 @@ function customBase64Encode(inputStr) {
 
 var images = {};
 var imagesToData = function(el, callback) {
-	var img = el.find('.what_happened img:not(.MSC-datafied), .bubble p img:not(.MSC-datafied)');
+	var img = el.find('.what_happened img:not(.MSC-datafied), .bubble p img:not(.MSC-datafied), .neron_talks img:not(.MSC-datafied)');
 	if (!img.length) { //All images have been datafied
 		callback();
 	}

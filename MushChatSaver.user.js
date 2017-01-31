@@ -1,25 +1,28 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.1.3
+// @version      2.1.4
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
 // @match        http://mush.vg/?*
+// @match        http://mush.vg/vending
 // @match        http://mush.twinoid.com/
 // @match        http://mush.twinoid.com/#*
 // @match        http://mush.twinoid.com/play*
 // @match        http://mush.twinoid.com/?*
+// @match        http://mush.twinoid.com/vending
 // @match        http://mush.twinoid.es/
 // @match        http://mush.twinoid.es/#*
 // @match        http://mush.twinoid.es/play*
 // @match        http://mush.twinoid.es/?*
+// @match        http://mush.twinoid.es/vending
 // @grant        unsafeWindow
 // @grant        GM_xmlhttpRequest
 // @connect      mush.vg
 // @connect      mush.twinoid.com
 // @connect      mush.twinoid.es
 // @connect      data.twinoid.com
-// @require      http://code.jquery.com/jquery-latest.js
+// @require      https://code.jquery.com/jquery-3.1.1.min.js
 // @downloadURL  http://labare.github.io/MushChatSaver/MushChatSaver.user.js
 // ==/UserScript==
 
@@ -37,8 +40,10 @@ if (document.domain == 'mush.vg') {
 	TXT = {
 		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Mur chargé !",
+		fav: "MCS : Favori",
 		unfav: "MCS : Plus favori...",
 		allFavsToMain: "Dé-favoriser tous les sujets",
+		allFavsToMainLoading: "Dé-favoriser tous les sujets (%1/%2)",
 		copyPrivate: "Copier le canal privé",
 		loadWholeWall: "Charger tout le canal général",
 		copyMainWall: "Copier le canal général",
@@ -54,8 +59,10 @@ else {
 	TXT = {
 		scriptName: "Mush Chat Saver v.%1",
 		wallLoaded: "Wall loaded!",
+		fav: "MCS : Favorite",
 		unfav: "MCS: Remove favorite...",
 		allFavsToMain: "Unfavorite all topics",
+		allFavsToMainLoading: "Unfavorite all topics (%1/%2)",
 		copyPrivate: "Copy private channel",
 		loadWholeWall: "Load the whole main wall",
 		copyMainWall: "Copy main wall",
@@ -199,7 +206,7 @@ var imagesToData = function(el, callback) {
 //Privates
 var channelButtons = function() {
 	$('#mushChannel, #cdPrivate0, #cdPrivate1, #cdPrivate2, #cdPrivate3, #cdPrivate4').each(function() {
-		if ($(this).size() < 1) {
+		if ($(this).length < 1) {
 			return true;
 		}
 
@@ -219,7 +226,7 @@ var channelButtons = function() {
 						}
 						else if (style) {
 							style = 'background-position: 0px ' + /(-[0-9]+px) !important/.exec(style)[1];
-						} //else: style = ''
+						} //else: style is empty
 
 						var charDiv = '<div class="' + char.attr('class') + '" style="' + style + '"></div>';
 						output += '<div class="message"> ' + charDiv + ' <p>' + line.find('.buddy')[0].outerHTML + line.find('p').html() + '</p> </div>\n';
@@ -237,7 +244,12 @@ var channelButtons = function() {
 	});
 	$('<div>').attr('id', 'MSC-reloadTest').appendTo($('#chatBlock'));
 
-	//Unfav buttons on death page
+	//Fav and unfav buttons on death page
+	$('#cdStdWall .mainmessage .replybuttons').each(function() {
+		if (!$(this).find('[src*="fav.png"]').length) {
+			$(this).append('<a href="#" class="butmini" onclick="Main.onFavClick($(this));return false;"> <img src="/img/icons/ui/fav.png"> ' + TXT.fav + '</a>');
+		}
+	});
 	$('#cdFavWall .mainmessage .replybuttons').each(function() {
 		if (!$(this).find('[src*="fav.png"]').length) {
 			$(this).append('<a href="#" class="butmini" onclick="Main.onUnfavClick($(this));return false;"> <img src="/img/icons/ui/fav.png"> ' + TXT.unfav + '</a>');
@@ -318,27 +330,29 @@ createButton(TXT.copyMainWall).appendTo(buttonsPanel).on('click', function() {
 $('<p>').text(TXT.copyMainWarning).appendTo(buttonsPanel);
 
 //Remove all favourites
-var removeFavourite = function(list, index) {
+var removeFavourite = function(list, index, buttonText) {
 	var k = list[index];
 	console.log('MCS: removing favourite #' + index + ' (k=' + k + ')');
+	buttonText.html("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> " + TXT.allFavsToMainLoading.replace('%1', index).replace('%2', list.length));
 	GM_xmlhttpRequest({
 		method: 'GET', url: 'http://' + document.domain + '/wallUnfav/' + k,
 		onload: function(resp) {
 			index += 1;
 			if (index == list.length) { //All done
-				window.location('/'); //Reload all
+				window.location = '/'; //Reload all
 			}
 			else {
-				removeFavourite(list, index);
+				removeFavourite(list, index, buttonText);
 			}
 		}
 	});
 }
 createButton(TXT.allFavsToMain).appendTo(buttonsPanel).on('click', function() {
+	var buttonText = $(this).find('.butbg');
 	var list = [];
 	$('#cdFavWall .unit').each(function() { list.push($(this).attr('data-k')); });
-	$(this).find('.butbg').prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");
-	removeFavourite(list, 0);
+	buttonText.prepend("<img class='MCSloading' src='/img/icons/ui/loading1.gif' alt='loading…' /> ");
+	removeFavourite(list, 0, buttonText);
 });
 
 //Editor
@@ -346,13 +360,13 @@ createButton('<a href="http://labare.github.io/MushChatSaver/MushChatSaver.html"
 
 //Output
 var popup = $('<div>').attr('id', 'MCS-popup').css({
-	position: 'absolute', width: '400px', padding: '20px 5px 5px 5px', zIndex: '3000',
+	position: 'fixed', width: '400px', padding: '20px 5px 5px 5px', zIndex: '3000',
 	left: Math.floor((window.innerWidth - 400) / 2) + 'px', top: (window.scrollY + 50) + 'px',
 	backgroundColor: '#33C', border: '2px #008 solid', borderRadius: '5px'
 }).hide().appendTo($('body'));
 $('<h1>').css({ textAlign: 'center', fontSize: '1.2em' }).text(TXT.popupTitle).appendTo(popup);
 $('<h3>').css({ textAlign: 'center', fontSize: '0.8em', marginBottom: '5px' }).text(TXT.popupTip).appendTo(popup);
-createButton("X").css({ position: 'absolute', right: '5px', top: '5px' }).appendTo(popup).on('click', function() { $('#MCS-popup').hide(); });
+createButton("X").css({ width: '25px', position: 'absolute', right: '5px', top: '5px' }).appendTo(popup).on('click', function() { $('#MCS-popup').hide(); });
 $('<textarea>').css({ width: '100%', height: '300px', color: 'black' }).attr('id', 'MCS-output').appendTo(popup);
 
 channelButtons();

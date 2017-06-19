@@ -2,11 +2,11 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;">
-	<title>Sauveur de chats Mush v2.1.4 — Mush Chat Saver v2.1.4</title>
+	<title>Sauveur de chats Mush v2.1.5 — Mush Chat Saver v2.1.5</title>
 	<meta charset="UTF-8">
 	<style>
 		html, body { margin: 0; padding: 0; }
-		body { margin-bottom: 10px; }
+		body { margin-bottom: 10px; background-color: #C2F3FC; }
 
 		#tip { display: none; position: fixed; text-align: center; padding: 3px; z-index: 10; border: 2px #9090CC solid; background-color: #BEBEED; }
 
@@ -63,6 +63,7 @@
 		.private { display: none; }
 		.private h1 { text-align: center; font-size: 1.5em; color: #F03; }
 		.anchor { position: absolute; bottom: 10px; right: 10px; }
+		.main, .reply, .message p { background-color: white; }
 		.mush .message p { background-color: #FCF; }
 		.log, .message { position: relative; }
 		.msgDelete { display: none; position: absolute; cursor: pointer; width: 12px; height: 12px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAMVJREFUKJF9krENgzAQRZ8RkpURUFaiTkUKpmAGdkCKFFKRMqyQkjEQGwQcRboUBuckIK+y/L99d982ADY9CzOurQ2KlWbTs4iIMIrwcqINW1oMYCZA3tA9cUWOBQFwTYUZ/f5CDD9zKF3kftE9YeghOQbNLKVdkXtxi+SILS+4tjZhwN1DygwQbV+5TxRub6ptx9D7IOb0YptmMj2uPo25BW1ecE2FPaFiVdjy4k1LWopVrHpAC6HV++FDRog1U89/+/s1vnlHd7qgRaYSAAAAAElFTkSuQmCC); }
@@ -143,7 +144,7 @@
 
 <div id='fr'>
 	<div id='input'>
-		<h1>Sauveur de chats Mush v2.1.4</h1>
+		<h1>Sauveur de chats Mush v2.1.5</h1>
 		<h3>Garanti sans Schrödinger infecté</h3>
 
 		<p>Utilisez le <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">script associé</a> pour récupérer les canaux dans un format utilisable.</p>
@@ -204,7 +205,7 @@
 
 <div id='en'>
 	<div id='input'>
-		<h1>Mush Chat Saver v2.1.4</h1>
+		<h1>Mush Chat Saver v2.1.5</h1>
 		<h3>Spoken words fly away, but words written on such a nice page definitely remain.</h3>
 
 		<p>Use the <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">MCS script</a> to retrieve channels in MCS-usable format.</p>
@@ -293,7 +294,7 @@ if ((sel('#fr') && sel('#en') && confirm("OK = Français\nCancel = English")) ||
 	var lang = sel('#en');
 	if (lang) {
 		document.body.removeChild(lang);
-		document.title = "Sauveur de chats Mush v2.1.4"; //VERSION
+		document.title = "Sauveur de chats Mush v2.1.5"; //VERSION
 	}
 }
 else {
@@ -325,7 +326,7 @@ else {
 	var lang = sel('#fr');
 	if (lang) {
 		document.body.removeChild(lang);
-		document.title = "Mush Chat Saver v2.1.4"; //VERSION
+		document.title = "Mush Chat Saver v2.1.5"; //VERSION
 	}
 }
 

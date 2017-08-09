@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.1.5
+// @version      2.1.6
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -210,7 +210,7 @@ var channelButtons = function() {
 			return true;
 		}
 
-		createButton(TXT.copyPrivate).css('float', 'left').insertAfter($(this).children().first()).on('click', function() { //float:left si le bouton se mélange aux boutons de réponse
+		var button = createButton(TXT.copyPrivate).insertAfter($(this).children().first()).on('click', function() {
 			var channel = $(this).parent();
 			var output = '';
 			imagesToData(channel, function() {
@@ -241,6 +241,9 @@ var channelButtons = function() {
 				$('#MCS-popup').show();
 			});
 		});
+		if ($(this).attr('id') != 'mushChannel') {
+			button.css('float', 'left'); //float:left si le bouton se mélange aux boutons de réponse, sauf canal Mush
+		}
 	});
 	$('<div>').attr('id', 'MSC-reloadTest').appendTo($('#chatBlock'));
 

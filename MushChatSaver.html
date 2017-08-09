@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;">
-	<title>Sauveur de chats Mush v2.1.5 — Mush Chat Saver v2.1.5</title>
+	<title>Sauveur de chats Mush v2.1.6 — Mush Chat Saver v2.1.6</title>
 	<meta charset="UTF-8">
 	<style>
 		html, body { margin: 0; padding: 0; }
@@ -144,7 +144,7 @@
 
 <div id='fr'>
 	<div id='input'>
-		<h1>Sauveur de chats Mush v2.1.5</h1>
+		<h1>Sauveur de chats Mush v2.1.6</h1>
 		<h3>Garanti sans Schrödinger infecté</h3>
 
 		<p>Utilisez le <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">script associé</a> pour récupérer les canaux dans un format utilisable.</p>
@@ -187,8 +187,8 @@
 					<img alt="Éditeur" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AUGAi060rk2vQAAASxJREFUOMulkktKA1EQRU91kw9+kmgERUQQdAMuwB04cUW6Jl2GYwdGEUQxEZUkom1/8q6D7jTdxLRiLjx4g3rn1b1VJolF5LGosg48QD+cTtU7SdjUgpkJQOe9vMiOD8ggozkfly3oogcuy2R/ncEpAEOg/bcMBDR8ONxifNXF78LgrBoyG+LRLh83q1gTajvgb1RDrDhGM5P7AhdAeA2TF1AISR+SZ9hMLa1lsHKIJUgIilJI0k/v8QNMXnNIF3ibB2gBIxeCYojuIL5PO4kfSxCTNJuBpDHQ8hpgNajvpVlYE2rb4HWYTkczGRS6AFgB3qd2oluIn0ABtE8A6Ega5RtVPAUtA3IhSobo8zLf0KV8mX4BkBXLBfnjerG2ykJRTSAAfElu7h78R9+fLcw85haOzwAAAABJRU5ErkJggg==" />
 				</div>
 				<div id="cats">
-					<div class='tab' onclick='tabClick(this, "#sub_0");' onmouseover='showTip(event, this);' onmousemove='moveTip(event);' onmouseout='hideTip();'>
-						<img alt="Canal Mush" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO1JREFUeNpiZMAO/mMRY8SmkAmLxv//y2Yz/H/1AYHZteFy+Ez9/z97AgNDfQKEN3s7qsqmFoiGn1dR9DIRpRkELB0hCoGuQXIR2BTCmncfRbCP70c4H+gaFhSF6JqRNeIAEAM+fUXVjEsjku3ogfj/f+tykjRDA5ORET3uqxi4GVpZpRkY2HkZGH7/wLQRLRawJiKf8Nz/SPGOjgmmrv+rD31kePfmBcOHd6/AAp8/vmFoKQ7Eqh6rAWfvoVp078knsIHpQeoYelgYiABKMnxgTExeANtgrMTIQCxgwiUxqa8dL59gVBCbpQECDACbWGg/x85I9gAAAABJRU5ErkJggg==" />
+					<div class='tab' data-mushtab='true' onclick='return false; tabClick(this, "#sub_0");' onmouseover='showTip(event, this);' onmousemove='moveTip(event);' onmouseout='hideTip();'>
+						<img class='mushtabimg' alt="Canal Mush (vide)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO1JREFUeNpiZMAO/mMRY8SmkAmLxv//y2Yz/H/1AYHZteFy+Ez9/z97AgNDfQKEN3s7qsqmFoiGn1dR9DIRpRkELB0hCoGuQXIR2BTCmncfRbCP70c4H+gaFhSF6JqRNeIAEAM+fUXVjEsjku3ogfj/f+tykjRDA5ORET3uqxi4GVpZpRkY2HkZGH7/wLQRLRawJiKf8Nz/SPGOjgmmrv+rD31kePfmBcOHd6/AAp8/vmFoKQ7Eqh6rAWfvoVp078knsIHpQeoYelgYiABKMnxgTExeANtgrMTIQCxgwiUxqa8dL59gVBCbpQECDACbWGg/x85I9gAAAABJRU5ErkJggg==" />
 					</div>
 					<div class='tab selected' onclick='tabClick(this, "#wall");' onmouseover='showTip(event, this);' onmousemove='moveTip(event);' onmouseout='hideTip();'>
 						<img alt="Canal général" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUNJREFUeNpi/P//PwMlgAVEMDIy4jKFEWQBPnkmkOT/O/4Mn//+w8BA8B8kjy5+5ftvhv/zGcHyLDCj/sCcgwS27dvHsHv9GsJegIGD61cwvL5/E8w28ImEi9+5dYvhwpblDDzCYmC+ZmQadgPsAyNQTH/+/BmYVlFTY1ApqoeLP/z1F7sBOxZOZ/jy9hWGC25evsRwefd6wi7wiM/E6gJ1XT0wJtsFRIcBLhfAwuDD+/dg/kdcsUAICAgKQgzA5oWaoiKIrU+fMnz//p3hy5cvDEk+9mCxroZ6DMOalKBJEZSa/t8D+vffN2Bq+srAwMoLFPkJ5H9nsE+Hpo8lRgwM56czfOdlY2D49Zvh398/DNzPfzEwJv4H6QYn8//Y8P8jMv//7xf7j1MekpyxA2SDs/MLwGLI+QGkGYQZKc3OAAEGABwewM7v8I9BAAAAAElFTkSuQmCC" />
@@ -205,7 +205,7 @@
 
 <div id='en'>
 	<div id='input'>
-		<h1>Mush Chat Saver v2.1.5</h1>
+		<h1>Mush Chat Saver v2.1.6</h1>
 		<h3>Spoken words fly away, but words written on such a nice page definitely remain.</h3>
 
 		<p>Use the <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">MCS script</a> to retrieve channels in MCS-usable format.</p>
@@ -247,8 +247,8 @@
 					<img alt="Editor" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AUGAi060rk2vQAAASxJREFUOMulkktKA1EQRU91kw9+kmgERUQQdAMuwB04cUW6Jl2GYwdGEUQxEZUkom1/8q6D7jTdxLRiLjx4g3rn1b1VJolF5LGosg48QD+cTtU7SdjUgpkJQOe9vMiOD8ggozkfly3oogcuy2R/ncEpAEOg/bcMBDR8ONxifNXF78LgrBoyG+LRLh83q1gTajvgb1RDrDhGM5P7AhdAeA2TF1AISR+SZ9hMLa1lsHKIJUgIilJI0k/v8QNMXnNIF3ibB2gBIxeCYojuIL5PO4kfSxCTNJuBpDHQ8hpgNajvpVlYE2rb4HWYTkczGRS6AFgB3qd2oluIn0ABtE8A6Ega5RtVPAUtA3IhSobo8zLf0KV8mX4BkBXLBfnjerG2ykJRTSAAfElu7h78R9+fLcw85haOzwAAAABJRU5ErkJggg==" />
 				</div>
 				<div id="cats">
-					<div class='tab' onclick='tabClick(this, "#sub_0");' onmouseover='showTip(event, this);' onmousemove='moveTip(event);' onmouseout='hideTip();'>
-						<img alt="Mush channel" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO1JREFUeNpiZMAO/mMRY8SmkAmLxv//y2Yz/H/1AYHZteFy+Ez9/z97AgNDfQKEN3s7qsqmFoiGn1dR9DIRpRkELB0hCoGuQXIR2BTCmncfRbCP70c4H+gaFhSF6JqRNeIAEAM+fUXVjEsjku3ogfj/f+tykjRDA5ORET3uqxi4GVpZpRkY2HkZGH7/wLQRLRawJiKf8Nz/SPGOjgmmrv+rD31kePfmBcOHd6/AAp8/vmFoKQ7Eqh6rAWfvoVp078knsIHpQeoYelgYiABKMnxgTExeANtgrMTIQCxgwiUxqa8dL59gVBCbpQECDACbWGg/x85I9gAAAABJRU5ErkJggg==" />
+					<div class='tab' data-mushtab='true' onclick='return false; tabClick(this, "#sub_0");' onmouseover='showTip(event, this);' onmousemove='moveTip(event);' onmouseout='hideTip();'>
+						<img class='mushtabimg' alt="Mush channel (empty)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO1JREFUeNpiZMAO/mMRY8SmkAmLxv//y2Yz/H/1AYHZteFy+Ez9/z97AgNDfQKEN3s7qsqmFoiGn1dR9DIRpRkELB0hCoGuQXIR2BTCmncfRbCP70c4H+gaFhSF6JqRNeIAEAM+fUXVjEsjku3ogfj/f+tykjRDA5ORET3uqxi4GVpZpRkY2HkZGH7/wLQRLRawJiKf8Nz/SPGOjgmmrv+rD31kePfmBcOHd6/AAp8/vmFoKQ7Eqh6rAWfvoVp078knsIHpQeoYelgYiABKMnxgTExeANtgrMTIQCxgwiUxqa8dL59gVBCbpQECDACbWGg/x85I9gAAAABJRU5ErkJggg==" />
 					</div>
 					<div class='tab selected' onclick='tabClick(this, "#wall");' onmouseover='showTip(event, this);' onmousemove='moveTip(event);' onmouseout='hideTip();'>
 						<img alt="Main channel" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUNJREFUeNpi/P//PwMlgAVEMDIy4jKFEWQBPnkmkOT/O/4Mn//+w8BA8B8kjy5+5ftvhv/zGcHyLDCj/sCcgwS27dvHsHv9GsJegIGD61cwvL5/E8w28ImEi9+5dYvhwpblDDzCYmC+ZmQadgPsAyNQTH/+/BmYVlFTY1ApqoeLP/z1F7sBOxZOZ/jy9hWGC25evsRwefd6wi7wiM/E6gJ1XT0wJtsFRIcBLhfAwuDD+/dg/kdcsUAICAgKQgzA5oWaoiKIrU+fMnz//p3hy5cvDEk+9mCxroZ6DMOalKBJEZSa/t8D+vffN2Bq+srAwMoLFPkJ5H9nsE+Hpo8lRgwM56czfOdlY2D49Zvh398/DNzPfzEwJv4H6QYn8//Y8P8jMv//7xf7j1MekpyxA2SDs/MLwGLI+QGkGYQZKc3OAAEGABwewM7v8I9BAAAAAElFTkSuQmCC" />
@@ -263,73 +263,84 @@
 	</div>
 </div>
 
-<script>
-/* LOCALISATION */
-if ((sel('#fr') && sel('#en') && confirm("OK = Français\nCancel = English")) || !sel('#en')) {
-	var TXT = {
-		mushChannel: "Canal Mush",
-		retrieve: "Récupérer le code",
-		rename: "Renommer",
-		move: "Déplacer",
-		delete: "Supprimer",
-		retrieveTitle: "Copiez ce code :",
-		moveChannelTitle: "Déplacer le canal vers le groupe :",
-		cancel: "Annuler",
-		confirmDeleteMain: "Attention : une fois supprimé, le canal général n'est plus récupérable. Voulez-vous continuer ?",
-		promptNewCatName: "Nouveau nom de la catégorie :",
-		confirmDeleteCat: "Attention : les canaux privés de cette catégorie seront transférés dans la catégorie Canal Mush. Vous pouvez toujours les déplacer ou les supprimer à n'importe quel moment, un par un. Voulez-vous vraiment supprimer cette catégorie ?",
-		alertUnfilledFields: "Veuillez compléter tous les champs.",
-		channelSettings: "Paramètres de canal : ",
-		promptNewChannelName: "Nouveau nom du canal :",
-		confirmDeleteChannel: "Attention : cette opération est irréversible. Voulez-vous vraiment supprimer ce canal ?",
-		hideReplies: "Cacher les réponses",
-		showReplies: "Montrer les réponses",
-		hideAllReplies: "Cacher toutes les réponses",
-		showAllReplies: "Montrer toutes les réponses",
-		openEditor: "Ouvrir l'éditeur",
-		closeEditor: "Fermer l'éditeur",
-		newLog: "+ Nouveau log",
-		newLogDefaultText: "Utilisez les balises **texte** pour mettre en gras et //texte// pour les italiques.",
-	};
-	var lang = sel('#en');
-	if (lang) {
-		document.body.removeChild(lang);
-		document.title = "Sauveur de chats Mush v2.1.5"; //VERSION
-	}
-}
-else {
-	var TXT = {
-		mushChannel: "Mush channel",
-		retrieve: "Retrieve code",
-		rename: "Rename",
-		move: "Move",
-		delete: "Delete",
-		retrieveTitle: "Copy this code:",
-		moveChannelTitle: "Move channel to group:",
-		cancel: "Cancel",
-		confirmDeleteMain: "Warning: once deleted, the main wall cannot be retrieved. Continue?",
-		promptNewCatName: "New group name:",
-		confirmDeleteCat: "Warning: the private channels of this group will be moved to the Mush channel group. You may move them again or delete them anytime, one by one. Do you really want to delete this group?",
-		alertUnfilledFields: "Please fill all fields.",
-		channelSettings: "Channel settings: ",
-		promptNewChannelName: "New channel name:",
-		confirmDeleteChannel: "Warning: this cannot be undone. Do you really want to delete this channel?",
-		hideReplies: "Hide replies",
-		showReplies: "Show replies",
-		hideAllReplies: "Hide all replies",
-		showAllReplies: "Show all replies",
-		openEditor: "Open editor",
-		closeEditor: "Close editor",
-		newLog: "+ New log",
-		newLogDefaultText: "Use **text** for bold and //text// for italics.",
-	};
-	var lang = sel('#fr');
-	if (lang) {
-		document.body.removeChild(lang);
-		document.title = "Mush Chat Saver v2.1.5"; //VERSION
-	}
-}
+<div style='display:none;'>
+	<div id='FRtexts'>
+		<span class='txt-mushChannel'>Canal Mush</span>
+		<span class='txt-mushChannelEmpty'>Canal Mush (vide)</span>
+		<span class='txt-retrieve'>Récupérer le code</span>
+		<span class='txt-rename'>Renommer</span>
+		<span class='txt-move'>Déplacer</span>
+		<span class='txt-delete'>Supprimer</span>
+		<span class='txt-retrieveTitle'>Copiez ce code :</span>
+		<span class='txt-moveChannelTitle'>Déplacer le canal vers le groupe :</span>
+		<span class='txt-cancel'>Annuler</span>
+		<span class='txt-confirmDeleteMain'>Attention : une fois supprimé, le canal général n'est plus récupérable. Voulez-vous continuer ?</span>
+		<span class='txt-promptNewCatName'>Nouveau nom de la catégorie :</span>
+		<span class='txt-confirmDeleteCat'>Attention : les canaux privés de cette catégorie seront transférés dans la catégorie Canal Mush. Vous pouvez toujours les déplacer ou les supprimer à n'importe quel moment, un par un. Voulez-vous vraiment supprimer cette catégorie ?</span>
+		<span class='txt-alertUnfilledFields'>Veuillez compléter tous les champs.</span>
+		<span class='txt-channelSettings'>Paramètres de canal : </span>
+		<span class='txt-promptNewChannelName'>Nouveau nom du canal :</span>
+		<span class='txt-confirmDeleteChannel'>Attention : cette opération est irréversible. Voulez-vous vraiment supprimer ce canal ?</span>
+		<span class='txt-hideReplies'>Cacher les réponses</span>
+		<span class='txt-showReplies'>Montrer les réponses</span>
+		<span class='txt-hideAllReplies'>Cacher toutes les réponses</span>
+		<span class='txt-showAllReplies'>Montrer toutes les réponses</span>
+		<span class='txt-openEditor'>Ouvrir l'éditeur</span>
+		<span class='txt-closeEditor'>Fermer l'éditeur</span>
+		<span class='txt-newLog'>+ Nouveau log</span>
+		<span class='txt-newLogDefaultText'>Utilisez les balises **texte** pour mettre en gras et //texte// pour les italiques.</span>
+		<span class='txt-pageTitle'>Sauveur de chats Mush v2.1.6</span>
+	</div>
 
+	<div id='ENtexts'>
+		<span class='txt-mushChannel'>Mush channel</span>
+		<span class='txt-mushChannelEmpty'>Mush channel (empty)</span>
+		<span class='txt-retrieve'>Retrieve code</span>
+		<span class='txt-rename'>Rename</span>
+		<span class='txt-move'>Move</span>
+		<span class='txt-delete'>Delete</span>
+		<span class='txt-retrieveTitle'>Copy this code:</span>
+		<span class='txt-moveChannelTitle'>Move channel to group:</span>
+		<span class='txt-cancel'>Cancel</span>
+		<span class='txt-confirmDeleteMain'>Warning: once deleted, the main wall cannot be retrieved. Continue?</span>
+		<span class='txt-promptNewCatName'>New group name:</span>
+		<span class='txt-confirmDeleteCat'>Warning: the private channels of this group will be moved to the Mush channel group. You may move them again or delete them anytime, one by one. Do you really want to delete this group?</span>
+		<span class='txt-alertUnfilledFields'>Please fill all fields.</span>
+		<span class='txt-channelSettings'>Channel settings: </span>
+		<span class='txt-promptNewChannelName'>New channel name:</span>
+		<span class='txt-confirmDeleteChannel'>Warning: this cannot be undone. Do you really want to delete this channel?</span>
+		<span class='txt-hideReplies'>Hide replies</span>
+		<span class='txt-showReplies'>Show replies</span>
+		<span class='txt-hideAllReplies'>Hide all replies</span>
+		<span class='txt-showAllReplies'>Show all replies</span>
+		<span class='txt-openEditor'>Open editor</span>
+		<span class='txt-closeEditor'>Close editor</span>
+		<span class='txt-newLog'>+ New log</span>
+		<span class='txt-newLogDefaultText'>Use **text** for bold and //text// for italics.</span>
+		<span class='txt-pageTitle'>Mush Chat Saver v2.1.6</span>
+	</div>
+
+	<div id='queries'>
+		<span id='query-tab_selected'>tab selected</span>
+		<span id='query-addChannel_selected'>[name="input_name_private_cat"] [selected="selected"]</span>
+		<span id='query-renameCatSelA'>#cats [onclick*="#sub_</span>
+		<span id='query-renameCatSelB'>"] img</span>
+		<span id='query-renameCatSelC'>[name="input_name_private_cat"] [value="</span>
+		<span id='query-sub0_channels'>#sub_0 .channels</span>
+		<span id='query-private_mush'>private mush</span>
+		<span id='query-newLog_first'>newLog first</span>
+		<span id='query-log_message'>.log, .message</span>
+		<span id='query-space_h1'> h1</span>
+		<span id='query-moveChannelSel'>[name="input_name_private_cat"] option</span>
+		<span id='query-space_channels'> .channels</span>
+		<span id='query-newLogImg'>fakelogimg pic_none</span>
+		<span id='query-fakelogimg_space'>fakelogimg </span>
+		<span id="query-return_false">return false;</span>
+	</div>
+</div>
+
+<script>
+try{
 /* FONCTIONS GÉNÉRALES */
 function sel(name, parent) {
 	var context = parent || document;
@@ -368,36 +379,48 @@ function addNewEl(type, parent, id, content, attrs) {
 	return el;
 }
 
-/* FONCTIONS DE GÉNÉRATION */
-/*function styleImages(parent) {
-	//Don't use this, it doesn't help much and makes retrieving a channel code harder
-	var images = parent.getElementsByTagName('img');
-	for (var i = 0; i < images.length; i++) {
-		var name = images[i].getAttribute('data-imgname');
-		if (name) {
-			if (!sel('#pic_' + name)) { //Create style
-				var width = images[i].getAttribute('data-imgw');
-				var height = images[i].getAttribute('data-imgh');
-				var data = images[i].getAttribute('src');
-				addNewEl('style', document.head, 'pic_' + name, '.pic_' + name + ' { width: ' + width + 'px; height: ' + height + 'px; background-image: url(' + data + '); }');
-			}
-			images[i].className = 'pic_' + name;
-			images[i].setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw=='); //pixel.gif
-			images[i].removeAttribute('data-imgname');
-		}
-	}
-}*/
+function query(name) {
+	return sel('#query-' + name).textContent;
+}
 
+
+/* LOCALISATION */
+function getTexts(language, names) { //Merci_Firefox_qui_fout_des_sauts_de_ligne_partout_et_casse_le_JS…_MÊME_DANS_LES_COMMENTAIRES_PUTAIN
+	var obj = {};
+	for (var i = 0; i < names.length; i++) {
+		obj[names[i]] = sel(language + ' ' + '.txt-' + names[i]).textContent;
+	}
+	return obj;
+}
+
+if ((sel('#fr') && sel('#en') && confirm("OK=Français\nCancel=English")) || !sel('#en')) {
+	var TXT = getTexts('#FRtexts', ['mushChannel', 'mushChannelEmpty', 'retrieve', 'rename', 'move', 'delete', 'retrieveTitle', 'moveChannelTitle', 'cancel', 'confirmDeleteMain', 'promptNewCatName', 'confirmDeleteCat', 'alertUnfilledFields', 'channelSettings', 'promptNewChannelName', 'confirmDeleteChannel', 'hideReplies', 'showReplies', 'hideAllReplies', 'showAllReplies', 'openEditor', 'closeEditor', 'newLog', 'newLogDefaultText', 'pageTitle']);
+	var lang = sel('#en');
+	if (lang) {
+		document.body.removeChild(lang);
+		document.title = TXT.pageTitle; //VERSION
+	}
+}
+else {
+	var TXT = getTexts('#ENtexts', ['mushChannel', 'mushChannelEmpty', 'retrieve', 'rename', 'move', 'delete', 'retrieveTitle', 'moveChannelTitle', 'cancel', 'confirmDeleteMain', 'promptNewCatName', 'confirmDeleteCat', 'alertUnfilledFields', 'channelSettings', 'promptNewChannelName', 'confirmDeleteChannel', 'hideReplies', 'showReplies', 'hideAllReplies', 'showAllReplies', 'openEditor', 'closeEditor', 'newLog', 'newLogDefaultText', 'pageTitle']);
+	var lang = sel('#fr');
+	if (lang) {
+		document.body.removeChild(lang);
+		document.title = TXT.pageTitle; //VERSION
+	}
+}
+
+
+/* FONCTIONS DE GÉNÉRATION */
 function generateMain() {
 	sel('#wall').innerHTML = sel('#input_main').value;
-	//styleImages(sel('#wall'));
 	sel('#input_main').value = '';
 	//Display
 	var selected = sel('.selected');
 	if (selected) {
 		selected.className = 'tab';
 	}
-	sel('[onclick*="#wall"]').className = 'tab selected';
+	sel('[onclick*="#wall"]').className = query('tab_selected');
 	changeChannel('#wall');
 	var cats = selAll('.cat');
 	for (var i = 0; i < cats.length; i++) {
@@ -407,7 +430,7 @@ function generateMain() {
 	for (var i = 0; i < privates.length; i++) {
 		privates[i].style.display = 'none';
 	}
-	window.onbeforeunload = function() { return "Le bisou o/"; };
+	window.onbeforeunload = function() { return ''; };
 }
 
 function retrieveMain() {
@@ -432,8 +455,8 @@ function addCat() {
 	var index = parseInt(sel('#catsIndex').getAttribute('data-index'));
 	sel('#catsIndex').setAttribute('data-index', index + 1);
 
-	//addChannel select cat
-	var selected = sel('[name="input_name_private_cat"] [selected="selected"]');
+	//addChannel_select_cat
+	var selected = sel(query('addChannel_selected'));
 	if (selected) {
 		selected.removeAttribute('selected');
 	}
@@ -442,17 +465,17 @@ function addCat() {
 	//Tab
 	var tab = addNewEl('div', sel('#cats'), null, null, {
 		class: 'tab',
-		onclick: 'tabClick(this, "#sub_' + index + '");',
-		onmouseover: 'showTip(event, this);',
+		onclick: 'tabClick(this,"#sub_' + index + '");',
+		onmouseover: 'showTip(event,this);',
 		onmousemove: 'moveTip(event);',
 		onmouseout: 'hideTip();'
 	});
 	addNewEl('img', tab, null, null, {
 		alt: name,
-		src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAP9JREFUeNpi/P//PwMlgImBQsBiooYwozcNQhfPYmA4exviNGNVRkaYvKYcFhcAFTLAsEMpWA8zSPP//2fJdhVI8///V7NBpv0HugCrGrgXkDkQ3UCb721nYHg6F58lDVB9jEwwTTAM1vxkHk7XQelGZBcwMLz/CsSHICJomkEBd/Y2xDZkm2FsiAGXExh+fLyHopFjJyjIHxGORjC56g8DBwMkjn64o2q6DuEyIvkdhQ02gHHqIyRPymEYggRgmuuRXcD4PxuRQoCG/f/PIEfI5XCXYLigO5WRBcj/g2woLC0gpUR44mBBTigRDmDqL1AzI8glxKQ6xgHPjQABBgCU2WvV7pd6zAAAAABJRU5ErkJggg==",
+		src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAP9JREFUeNpi/P//PwMlgImBQsBiooYwozcNQhfPYmA4exviNGNVRkaYvKYcFhcAFTLAsEMpWA8zSPP//2fJdhVI8///V7NBpv0HugCrGrgXkDkQ3UCb721nYHg6F58lDVB9jEwwTTAM1vxkHk7XQelGZBcwMLz/CsSHICJomkEBd/Y2xDZkm2FsiAGXExh+fLyHopFjJyjIHxGORjC56g8DBwMkjn64o2q6DuEyIvkdhQ02gHHqIyRPymEYggRgmuuRXcD4PxuRQoCG/f/PIEfI5XCXYLigO5WRBcj/g2woLC0gpUR44mBBTigRDmDqL1AzI8glxKQ6xgHPjQABBgCU2WvV7pd6zAAAAABJRU5ErkJggg==',
 	});
 
-	//Menu category
+	//Menu_category
 	var menu = addNewEl('div', sel('#menu'), 'sub_' + index, null, { class: 'cat' });
 	addNewEl('h1', menu, null, name);
 	var options = addNewEl('div', menu);
@@ -461,27 +484,27 @@ function addCat() {
 	addNewEl('span', options, null, TXT.delete, { onclick: 'deleteCat(' + index + ');' });
 	addNewEl('div', menu, null, null, { class: 'channels' });
 
-	//Display and clean
+	//Display_and_clean
 	var selected = sel('.selected');
 	if (selected) {
 		selected.className = 'tab';
 	}
-	tab.className = 'tab selected';
+	tab.className = query('tab_selected');
 	displaySubCat('#sub_' + index, true);
 	sel('[name="input_cat"]').value = '';
 	var privates = selAll('.private');
 	for (var i = 0; i < privates.length; i++) {
 		privates[i].style.display = 'none';
 	}
-	window.onbeforeunload = function() { return "Le bisou o/"; };
+	window.onbeforeunload = function() { return ''; };
 }
 
 function renameCat(cat) {
 	var name = prompt(TXT.promptNewCatName);
 	if (name) {
-		sel('#cats [onclick*="#sub_' + cat + '"] img').setAttribute('alt', name);
+		sel(query('renameCatSelA') + cat + query('renameCatSelB')).setAttribute('alt', name);
 		sel('#sub_' + cat + ' h1').textContent = name;
-		sel('[name="input_name_private_cat"] [value="' + cat + '"]').textContent = name;
+		sel(query('renameCatSelC') + cat + '"]').textContent = name;
 	}
 }
 
@@ -493,18 +516,18 @@ function deleteCat(cat) {
 		return;
 	}
 	for (var i = 0; i < children.length; i++) {
-		sel('#sub_0 .channels').appendChild(channels.removeChild(children[i]));
+		sel(query('sub0_channels')).appendChild(channels.removeChild(children[i]));
 	}
 
 	sel('#cats').removeChild(sel('[onclick*="#sub_' + cat + '"]'));
 	sel('[name="input_name_private_cat"]').removeChild(sel('[value="' + cat + '"]'));
 	sel('#menu').removeChild(sub);
-	//Display Mush channel
+	//Display_Mush_channel
 	var selected = sel('.selected');
 	if (selected) {
 		selected.className = 'tab';
 	}
-	sel('[onclick*="#sub_0"]').className = 'tab selected';
+	sel('[onclick*="#sub_0"]').className = query('tab_selected');
 	displaySubCat('#sub_0', true);
 }
 
@@ -522,7 +545,9 @@ function addChannel() {
 	var channel = document.createElement('div');
 	channel.id = 'private' + index;
 	if (cat == '0') {
-		channel.className = 'private mush';
+		channel.className = query('private_mush');
+		sel('[data-mushtab]').setAttribute('onclick', 'tabClick(this,"#sub_0");');
+		sel('.mushtabimg').setAttribute('alt', TXT.mushChannel);
 	}
 	else {
 		channel.className = 'private';
@@ -533,38 +558,35 @@ function addChannel() {
 	addNewEl('span', options, null, TXT.move, { onclick: 'moveChannel(' + index + ');' });
 	addNewEl('span', options, null, TXT.delete, { onclick: 'deleteChannel(' + index + ');' });
 	addNewEl('h1', channel, null, name);
-	addNewEl('div', channel, null, TXT.newLog, { class: 'newLog first', onclick: 'newLog(this, true);' });
+	addNewEl('div', channel, null, TXT.newLog, { class: query('newLog_first'), onclick: 'newLog(this,true);' });
 	channel.innerHTML += sel('#input_private').value;
 	sel('#chat').appendChild(channel);
 
-	//Images
-	//styleImages(channel);
-
-	//Channel editing
-	var divs = channel.querySelectorAll('.log, .message');
+	//Channel_editing
+	var divs = channel.querySelectorAll(query('log_message'));
 	for (var i = 0; i < divs.length; i++) {
 		addNewEl('img', divs[i], null, null, {
 			src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==', //pixel.gif
 			class: 'msgDelete',
 			onclick: 'this.parentNode.parentNode.removeChild(this.parentNode);'
 		});
-		addNewEl('div', divs[i], null, TXT.newLog, { class: 'newLog', onclick: 'newLog(this, false);' });
+		addNewEl('div', divs[i], null, TXT.newLog, { class: 'newLog', onclick: 'newLog(this,false);' });
 	}
 
-	//Channel link
+	//Channel_link
 	addNewEl('div', sel('#sub_' + cat + ' .channels'), null, name, { class: 'channellink', onclick: 'changeChannel("#private' + index + '");' });
 
-	//Display and clean
+	//Display_and_clean
 	var selected = sel('.selected');
 	if (selected) {
 		selected.className = 'tab';
 	}
-	sel('[onclick*="#sub_' + cat + '"]').className = 'tab selected';
+	sel('[onclick*="#sub_' + cat + '"]').className = query('tab_selected');
 	displaySubCat('#sub_' + cat, true);
 	changeChannel('#private' + index);
 	sel('#input_private').value = '';
 	sel('[name="input_name_private"]').value = '';
-	window.onbeforeunload = function() { return "Le bisou o/"; };
+	window.onbeforeunload = function() { return ''; };
 }
 
 function retrieveChannel(channel) {
@@ -593,7 +615,7 @@ function renameChannel(channel) {
 	var name = prompt(TXT.promptNewChannelName);
 	if (name) {
 		sel('[onclick*="#private' + channel + '"]').textContent = name;
-		sel('#private' + channel + ' h1').textContent = name;
+		sel('#private' + channel + query('space_h1')).textContent = name;
 	}
 }
 
@@ -601,18 +623,18 @@ function moveChannel(channel) {
 	var id = channel;
 	var popup = addNewEl('div', document.body, 'popup', '<h1>' + TXT.moveChannelTitle + '</h1>');
 	popup.style.left = Math.floor((window.innerWidth - 300) / 2) + 'px';
-	var cats = selAll('[name="input_name_private_cat"] option');
+	var cats = selAll(query('moveChannelSel'));
 	for (var i = 0; i < cats.length; i++) {
 		addNewEl('p', popup, null, cats[i].textContent, { 'data-cat': cats[i].value }).addEventListener('click', function() {
 			var cat = this.getAttribute('data-cat');
 			var channel = sel('[onclick*="#private' + id + '"]');
-			sel('#sub_' + cat + ' .channels').appendChild(channel.parentNode.removeChild(channel));
-			//Display new channel
+			sel('#sub_' + cat + query('space_channels')).appendChild(channel.parentNode.removeChild(channel));
+			//Display_new_channel
 			var selected = sel('.selected');
 			if (selected) {
 				selected.className = 'tab';
 			}
-			sel('[onclick*="#sub_' + cat + '"]').className = 'tab selected';
+			sel('[onclick*="#sub_' + cat + '"]').className = query('tab_selected');
 			displaySubCat('#sub_' + cat, true);
 			document.body.removeChild(popup);
 		});
@@ -628,6 +650,10 @@ function deleteChannel(channel) {
 	var sub_ch = sel('[onclick*="#private' + channel + '"]');
 	sub_ch.parentNode.removeChild(sub_ch);
 	sel('#chat').removeChild(sel('#private' + channel));
+	if (sel(query('sub0_channels')).children.length == 0) {
+		sel('[data-mushtab]').setAttribute('onclick', query('return_false') + 'tabClick(this,"#sub_0");');
+		sel('.mushtabimg').setAttribute('alt', TXT.mushChannelEmpty);
+	}
 }
 
 /* FONCTIONS D'AFFICHAGE */
@@ -701,7 +727,7 @@ function tabClick(el, target) {
 	if (selected) {
 		selected.className = 'tab';
 	}
-	el.className = 'tab selected';
+	el.className = query('tab_selected');
 }
 
 function displaySubCat(cat, forceOpen) {
@@ -726,7 +752,7 @@ function toggleEditor() {
 	}
 	else {
 		document.body.className = 'editoron';
-		window.onbeforeunload = function() { return "Le bisou o/"; };
+		window.onbeforeunload = function() { return ''; };
 	}
 }
 
@@ -767,7 +793,7 @@ function newLog(el, isFirst) {
 	var p = addNewEl('p', log);
 	var img = addNewEl('img', p, null, null, {
 		src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==',
-		class: 'fakelogimg pic_none',
+		class: query('newLogImg'),
 	});
 	img.addEventListener('click', function() {
 		if (document.body.className == 'editoroff') {
@@ -780,12 +806,12 @@ function newLog(el, isFirst) {
 				src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==',
 				class: 'pic_' + images[i],
 			}).addEventListener('click', function() {
-				this.parentNode.parentNode.querySelector('.fakelogimg').className = 'fakelogimg ' + this.className;
+				this.parentNode.parentNode.querySelector('.fakelogimg').className = query('fakelogimg_space') + this.className;
 				this.parentNode.parentNode.removeChild(this.parentNode);
 			});
 		}
 	});
-	addNewEl('span', p, null, null, { class: 'fakelogresult' }); //Contains the text
+	addNewEl('span', p, null, null, { class: 'fakelogresult' }); //Contains_the_text
 	addNewEl('input', p, null, null, { type: 'text', placeholder: TXT.newLogDefaultText }).addEventListener('input', function() {
 		this.previousSibling.innerHTML = this.value.replace(/\/\/(.*?)\/\//g, '<i>$1</i>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 	});
@@ -794,7 +820,7 @@ function newLog(el, isFirst) {
 		class: 'msgDelete',
 		onclick: 'this.parentNode.parentNode.removeChild(this.parentNode);'
 	});
-	addNewEl('div', log, null, TXT.newLog, { class: 'newLog', onclick: 'newLog(this, false);' });
+	addNewEl('div', log, null, TXT.newLog, { class: 'newLog', onclick: 'newLog(this,false);' });
 	if (isFirst) {
 		el.parentNode.insertBefore(log, el.nextSibling);
 	}
@@ -808,6 +834,7 @@ var cats = selAll('.cat');
 for (var i = 0; i < cats.length; i++) {
 	cats[i].style.display = 'none';
 }
+}catch(e){console.log(e);}
 </script>
 
 

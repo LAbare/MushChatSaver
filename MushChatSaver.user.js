@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name         MushChatSaver
-// @version      2.1.6
+// @version      2.1.7
 // @match        http://mush.vg/
 // @match        http://mush.vg/#*
 // @match        http://mush.vg/play*
@@ -227,9 +227,14 @@ var channelButtons = function() {
 						else if (style) {
 							style = 'background-position: 0px ' + /(-[0-9]+px) !important/.exec(style)[1];
 						} //else: style is empty
+						
+						var message = line.find('p').html();
+						if (!message) {
+							message = line.find('.talks').contents().eq(4).text().trim();
+						}
 
 						var charDiv = '<div class="' + char.attr('class') + '" style="' + style + '"></div>';
-						output += '<div class="message"> ' + charDiv + ' <p>' + line.find('.buddy')[0].outerHTML + line.find('p').html() + '</p> </div>\n';
+						output += '<div class="message"> ' + charDiv + ' <p>' + line.find('.buddy')[0].outerHTML + message + '</p> </div>\n';
 					}
 					else { //Log
 						var log = line.find('.what_happened').clone();

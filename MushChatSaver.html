@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;">
-	<title>Sauveur de chats Mush v2.1.6 — Mush Chat Saver v2.1.6</title>
+	<title>Sauveur de chats Mush v2.1.7 — Mush Chat Saver v2.1.7</title>
 	<meta charset="UTF-8">
 	<style>
 		html, body { margin: 0; padding: 0; }
@@ -144,7 +144,7 @@
 
 <div id='fr'>
 	<div id='input'>
-		<h1>Sauveur de chats Mush v2.1.6</h1>
+		<h1>Sauveur de chats Mush v2.1.7</h1>
 		<h3>Garanti sans Schrödinger infecté</h3>
 
 		<p>Utilisez le <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">script associé</a> pour récupérer les canaux dans un format utilisable.</p>
@@ -165,11 +165,23 @@
 			<input onclick="addCat();" value="Ajouter" type="button">
 
 			<h2>Canal privé</h2>
-			<label for="input_name_private">Nom du canal :</label> <input name="input_name_private" type="text">
-			<label for="input_name_private_cat">Groupe :</label>
-			<select name="input_name_private_cat">
-				<option selected="selected" value="0">Canal Mush</option>
+			<select id='add_or_create_private' style='display: none;' onchange='toggleAddPrivate(this);'>
+				<option value='addto_channel'>Ajouter à un canal</option>
+				<option value='create_channel' selected>Créer un nouveau canal</option>
 			</select>
+			<div id='create_channel'>
+				<label for="input_name_private">Nom du canal :</label> <input name="input_name_private" type="text">
+				<label for="input_name_private_cat">Groupe :</label>
+				<select name="input_name_private_cat">
+					<option selected="selected" value="0">Canal Mush</option>
+				</select>
+			</div>
+			<div id='addto_channel' style='display: none;'>
+				<label for='input_addto_channel'>Ajouter à la fin du canal :</label>
+				<select name='input_addto_channel'>
+					<optgroup label="Mush channel" id='addto_group0'></optgroup>
+				</select>
+			</div>
 			<textarea id="input_private"></textarea>
 			<input onclick="addChannel();" value="Ajouter" type="button">
 		</div>
@@ -205,7 +217,7 @@
 
 <div id='en'>
 	<div id='input'>
-		<h1>Mush Chat Saver v2.1.6</h1>
+		<h1>Mush Chat Saver v2.1.7</h1>
 		<h3>Spoken words fly away, but words written on such a nice page definitely remain.</h3>
 
 		<p>Use the <a href="http://labare.github.io/MushChatSaver/MushChatSaver.user.js">MCS script</a> to retrieve channels in MCS-usable format.</p>
@@ -226,11 +238,23 @@
 			<input onclick="addCat();" value="Add" type="button">
 
 			<h2>Private channel</h2>
-			<label for="input_name_private">Channel name:</label> <input name="input_name_private" type="text">
-			<label for="input_name_private_cat">Group:</label>
-			<select name="input_name_private_cat">
-				<option selected="selected" value="0">Mush channel</option>
+			<select id='add_or_create_private' style='display: none;' onchange='toggleAddPrivate(this);'>
+				<option value='addto_channel'>Append to a channel</option>
+				<option value='create_channel' selected>Create new channel</option>
 			</select>
+			<div id='create_channel'>
+				<label for="input_name_private">Channel name:</label> <input name="input_name_private" type="text">
+				<label for="input_name_private_cat">Group:</label>
+				<select name="input_name_private_cat">
+					<option selected="selected" value="0">Mush channel</option>
+				</select>
+			</div>
+			<div id='addto_channel' style='display: none;'>
+				<label for='input_addto_channel'>Append to channel:</label>
+				<select name='input_addto_channel'>
+					<optgroup label="Mush channel" id='addto_group0'></optgroup>
+				</select>
+			</div>
 			<textarea id="input_private"></textarea>
 			<input onclick="addChannel();" value="Add" type="button">
 		</div>
@@ -289,7 +313,7 @@
 		<span class='txt-closeEditor'>Fermer l'éditeur</span>
 		<span class='txt-newLog'>+ Nouveau log</span>
 		<span class='txt-newLogDefaultText'>Utilisez les balises **texte** pour mettre en gras et //texte// pour les italiques.</span>
-		<span class='txt-pageTitle'>Sauveur de chats Mush v2.1.6</span>
+		<span class='txt-pageTitle'>Sauveur de chats Mush v2.1.7</span>
 	</div>
 
 	<div id='ENtexts'>
@@ -317,7 +341,7 @@
 		<span class='txt-closeEditor'>Close editor</span>
 		<span class='txt-newLog'>+ New log</span>
 		<span class='txt-newLogDefaultText'>Use **text** for bold and //text// for italics.</span>
-		<span class='txt-pageTitle'>Mush Chat Saver v2.1.6</span>
+		<span class='txt-pageTitle'>Mush Chat Saver v2.1.7</span>
 	</div>
 
 	<div id='queries'>
@@ -329,13 +353,15 @@
 		<span id='query-sub0_channels'>#sub_0 .channels</span>
 		<span id='query-private_mush'>private mush</span>
 		<span id='query-newLog_first'>newLog first</span>
-		<span id='query-log_message'>.log, .message</span>
+		<span id='query-log_message'>.log:not(.hasedits), .message:not(.hasedits)</span>
+		<span id='query-space_hasedits'> hasedits</span>
 		<span id='query-space_h1'> h1</span>
 		<span id='query-moveChannelSel'>[name="input_name_private_cat"] option</span>
 		<span id='query-space_channels'> .channels</span>
 		<span id='query-newLogImg'>fakelogimg pic_none</span>
 		<span id='query-fakelogimg_space'>fakelogimg </span>
-		<span id="query-return_false">return false;</span>
+		<span id='query-return_false'>return false;</span>
+		<span id='query-addto_value_endswith'>[name="input_addto_channel"] [value$="</span>
 	</div>
 </div>
 
@@ -447,6 +473,10 @@ function retrieveMain() {
 function deleteMain() {
 	if (confirm(TXT.confirmDeleteMain)) {
 		sel('#wall').innerHTML = '';
+		var showWall = sel('[onclick*="toggleAllReplies"]');
+		if (showWall.getAttribute('data-state') != 'hidden') {
+			toggleAllReplies(showWall);
+		}
 	}
 }
 
@@ -483,6 +513,9 @@ function addCat() {
 	addNewEl('span', options, null, TXT.rename, { onclick: 'renameCat(' + index + ');' });
 	addNewEl('span', options, null, TXT.delete, { onclick: 'deleteCat(' + index + ');' });
 	addNewEl('div', menu, null, null, { class: 'channels' });
+	
+	//Edit_channel_cat
+	addNewEl('optgroup', sel('[name="input_addto_channel"]'), 'addto_group' + index, null, { label: name });
 
 	//Display_and_clean
 	var selected = sel('.selected');
@@ -505,6 +538,7 @@ function renameCat(cat) {
 		sel(query('renameCatSelA') + cat + query('renameCatSelB')).setAttribute('alt', name);
 		sel('#sub_' + cat + ' h1').textContent = name;
 		sel(query('renameCatSelC') + cat + '"]').textContent = name;
+		sel('#addto_group' + cat).setAttribute('label', name);
 	}
 }
 
@@ -518,6 +552,21 @@ function deleteCat(cat) {
 	for (var i = 0; i < children.length; i++) {
 		sel(query('sub0_channels')).appendChild(channels.removeChild(children[i]));
 	}
+	
+	sel('[data-mushtab]').setAttribute('onclick', 'tabClick(this,"#sub_0");');
+	sel('.mushtabimg').setAttribute('alt', TXT.mushChannel);
+	
+	//Edit_channel_group
+	var optgroup = sel('#addto_group' + cat);
+	var optchildren = [].slice.call(optgroup.children);
+	for (var i = 0; i < optchildren.length; i++) {
+		var index = optchildren[i].getAttribute('value').split('-')[1];
+		optchildren[i].setAttribute('value', '0-' + index);
+		sel('#addto_group0').appendChild(optgroup.removeChild(optchildren[i]));
+		//Also_turn_into_mush_channel
+		sel('#private' + index).className = query('private_mush');
+	}
+	optgroup.parentNode.removeChild(optgroup);
 
 	sel('#cats').removeChild(sel('[onclick*="#sub_' + cat + '"]'));
 	sel('[name="input_name_private_cat"]').removeChild(sel('[value="' + cat + '"]'));
@@ -531,40 +580,80 @@ function deleteCat(cat) {
 	displaySubCat('#sub_0', true);
 }
 
-function addChannel() {
-	var name = sel('[name="input_name_private"]').value;
-	var cat = sel('[name="input_name_private_cat"]').value;
-	if (!name || !sel('#input_private').value) {
-		alert(TXT.alertUnfilledFields);
-		return;
-	}
-	var index = parseInt(sel('#privatesIndex').getAttribute('data-index'));
-	sel('#privatesIndex').setAttribute('data-index', index + 1);
-
-	//Channel
-	var channel = document.createElement('div');
-	channel.id = 'private' + index;
-	if (cat == '0') {
-		channel.className = query('private_mush');
-		sel('[data-mushtab]').setAttribute('onclick', 'tabClick(this,"#sub_0");');
-		sel('.mushtabimg').setAttribute('alt', TXT.mushChannel);
+function toggleAddPrivate(select) {
+	var add = sel('#addto_channel');
+	var create = sel('#create_channel');
+	if (select.value == 'addto_channel') {
+		add.style.display = 'block';
+		create.style.display = 'none';
 	}
 	else {
-		channel.className = 'private';
+		add.style.display = 'none';
+		create.style.display = 'block';
 	}
-	var options = addNewEl('p', channel, null, TXT.channelSettings, { class: 'options' });
-	addNewEl('span', options, null, TXT.retrieve, { onclick: 'retrieveChannel(' + index + ');' });
-	addNewEl('span', options, null, TXT.rename, { onclick: 'renameChannel(' + index + ');' });
-	addNewEl('span', options, null, TXT.move, { onclick: 'moveChannel(' + index + ');' });
-	addNewEl('span', options, null, TXT.delete, { onclick: 'deleteChannel(' + index + ');' });
-	addNewEl('h1', channel, null, name);
-	addNewEl('div', channel, null, TXT.newLog, { class: query('newLog_first'), onclick: 'newLog(this,true);' });
-	channel.innerHTML += sel('#input_private').value;
-	sel('#chat').appendChild(channel);
+}
+
+function addChannel() {
+	//Create_channel
+	var choice = sel('#add_or_create_private');
+	if (choice.style.display == 'none' || choice.value == 'create_channel') {
+		choice.style.display = 'block';
+		var name = sel('[name="input_name_private"]').value;
+		sel('[name="input_name_private"]').value = '';
+		var cat = sel('[name="input_name_private_cat"]').value;
+		if (!name || !sel('#input_private').value) {
+			alert(TXT.alertUnfilledFields);
+			return;
+		}
+		var index = parseInt(sel('#privatesIndex').getAttribute('data-index'));
+		sel('#privatesIndex').setAttribute('data-index', index + 1);
+
+		//Channel
+		var channel = document.createElement('div');
+		channel.id = 'private' + index;
+		if (cat == '0') {
+			channel.className = query('private_mush');
+			sel('[data-mushtab]').setAttribute('onclick', 'tabClick(this,"#sub_0");');
+			sel('.mushtabimg').setAttribute('alt', TXT.mushChannel);
+		}
+		else {
+			channel.className = 'private';
+		}
+		var options = addNewEl('p', channel, null, TXT.channelSettings, { class: 'options' });
+		addNewEl('span', options, null, TXT.retrieve, { onclick: 'retrieveChannel(' + index + ');' });
+		addNewEl('span', options, null, TXT.rename, { onclick: 'renameChannel(' + index + ');' });
+		addNewEl('span', options, null, TXT.move, { onclick: 'moveChannel(' + index + ');' });
+		addNewEl('span', options, null, TXT.delete, { onclick: 'deleteChannel(' + index + ');' });
+		addNewEl('h1', channel, null, name);
+		addNewEl('div', channel, null, TXT.newLog, { class: query('newLog_first'), onclick: 'newLog(this,true);' });
+		channel.innerHTML += sel('#input_private').value;
+		sel('#chat').appendChild(channel);
+		
+		//Channel_link
+		addNewEl('div', sel('#sub_' + cat + query('space_channels')), null, name, { class: 'channellink', onclick: 'changeChannel("#private' + index + '");' });
+		
+		//Edit_channel_group
+		addNewEl('option', sel('#addto_group' + cat), null, name, { value: cat + '-' + index });
+	}
+	//Add_to_channel
+	else {
+		var index = sel('[name="input_addto_channel"]').value;
+		if (index == undefined) {
+			return false;
+		}
+		else {
+			index = index.split('-');
+			var cat = index[0];
+			index = index[1];
+		}
+		var channel = sel('#private' + index);
+		channel.innerHTML += sel('#input_private').value;
+	}
 
 	//Channel_editing
 	var divs = channel.querySelectorAll(query('log_message'));
 	for (var i = 0; i < divs.length; i++) {
+		divs[i].className += query('space_hasedits');
 		addNewEl('img', divs[i], null, null, {
 			src: 'data:image/gif;base64,R0lGODlhAQABAJEAAAAAAP///////wAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==', //pixel.gif
 			class: 'msgDelete',
@@ -572,9 +661,6 @@ function addChannel() {
 		});
 		addNewEl('div', divs[i], null, TXT.newLog, { class: 'newLog', onclick: 'newLog(this,false);' });
 	}
-
-	//Channel_link
-	addNewEl('div', sel('#sub_' + cat + ' .channels'), null, name, { class: 'channellink', onclick: 'changeChannel("#private' + index + '");' });
 
 	//Display_and_clean
 	var selected = sel('.selected');
@@ -585,7 +671,6 @@ function addChannel() {
 	displaySubCat('#sub_' + cat, true);
 	changeChannel('#private' + index);
 	sel('#input_private').value = '';
-	sel('[name="input_name_private"]').value = '';
 	window.onbeforeunload = function() { return ''; };
 }
 
@@ -616,6 +701,7 @@ function renameChannel(channel) {
 	if (name) {
 		sel('[onclick*="#private' + channel + '"]').textContent = name;
 		sel('#private' + channel + query('space_h1')).textContent = name;
+		sel(query('addto_value_endswith') + channel + '"]').textContent = name;
 	}
 }
 
@@ -629,6 +715,22 @@ function moveChannel(channel) {
 			var cat = this.getAttribute('data-cat');
 			var channel = sel('[onclick*="#private' + id + '"]');
 			sel('#sub_' + cat + query('space_channels')).appendChild(channel.parentNode.removeChild(channel));
+			//Edit_channel_group
+			var editch = sel(query('addto_value_endswith') + id + '"]');
+			sel('#addto_group' + cat).appendChild(editch.parentNode.removeChild(editch));
+			if (editch.getAttribute('value').split('-')[0] == '0') { //Original_cat_is_Mush
+				sel('#private' + id).className = 'private';
+			}
+			else if (cat == '0') {
+				sel('#private' + id).className = query('private_mush');
+				sel('[data-mushtab]').setAttribute('onclick', 'tabClick(this,"#sub_0");');
+				sel('.mushtabimg').setAttribute('alt', TXT.mushChannel);
+			}
+			if (sel(query('sub0_channels')).children.length == 0) {
+				sel('[data-mushtab]').setAttribute('onclick', query('return_false') + 'tabClick(this,"#sub_0");');
+				sel('.mushtabimg').setAttribute('alt', TXT.mushChannelEmpty);
+			}
+			editch.setAttribute('value', cat + '-' + id);
 			//Display_new_channel
 			var selected = sel('.selected');
 			if (selected) {
@@ -640,7 +742,6 @@ function moveChannel(channel) {
 		});
 	}
 	addNewEl('p', popup, null, TXT.cancel).addEventListener('click', function() { document.body.removeChild(popup); });
-
 }
 
 function deleteChannel(channel) {
@@ -654,6 +755,9 @@ function deleteChannel(channel) {
 		sel('[data-mushtab]').setAttribute('onclick', query('return_false') + 'tabClick(this,"#sub_0");');
 		sel('.mushtabimg').setAttribute('alt', TXT.mushChannelEmpty);
 	}
+	//Edit_channel_group
+	var editch = sel(query('addto_value_endswith') + channel + '"]');
+	editch.parentNode.removeChild(editch);
 }
 
 /* FONCTIONS D'AFFICHAGE */
@@ -706,6 +810,12 @@ function changeChannel(channel) {
 }
 
 function tabClick(el, target) {
+	var privates = selAll('.private');
+	for (var i = 0; i < privates.length; i++) {
+		privates[i].style.display = 'none';
+	}
+	sel('#wall').style.display = 'none';
+
 	var display = false;
 	if (target == '#wall') {
 		changeChannel('#wall');
